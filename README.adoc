@@ -26,4 +26,7 @@ Avatar server to generate avatars from strings.
 ** `docker run -d -p 8080:8080 -e DEBUG=true avatar-server`
 * Omit `-e DEBUG=true` to disable debug logs.
 
+Avatar-server is also available from Dockerhub:
+
+* `docker run -it --rm -p 8080:8080 -e DEBUG=true kazhar/avatar-server`
 
