@@ -73,40 +73,49 @@ html
         display: table-row-group;
       }
     body
-    div(class="center")
-      h1 Avatar Server 
-      p String to create avatars:
-      input(
-        id="avatarstring"
-        name='avatarstring'
-        value='Hello World!'
-        )
-      p
-        a(href="" onClick="return showAvatar();") Get avatars
-      pre.
-        API: Usage: /avatar/string?type&lt;avatar-type>&mask=&lt;mask>&size=&lt;size>&output=&lt;output-type>      
-        where
-        string = &lt;any string to create avatar from>
-        type   = identicon|github|square|triangle|male8bit|female8bit|cat, default is identicon
-        mask   = circle|roundedrect|square, default is square
-        size   = avatar size, default is 128
-        output = base64|png, default is png
+      div(class="center")
+        h1 Avatar Server 
+        p String to create avatars:
+        input(
+          id="avatarstring"
+          name='avatarstring'
+          value='Hello World!'
+          )
+        p
+          a(href="" id="showavatarbutton" onClick="return showAvatar();") Get avatars
+        pre.
+          API: /avatar/string?type&lt;avatar-type>&mask=&lt;mask>&size=&lt;size>&output=&lt;output-type>      
+          where
+          string = &lt;any string to create avatar from>
+          type   = identicon|github|square|triangle|male8bit|female8bit|cat, default is identicon
+          mask   = circle|roundedrect|square, default is square
+          size   = avatar size, default is 128
+          output = base64|png, default is png
 
-      p
-        div(class="divTable")
-          div(class="divTableBody")
-            div(class="divTableRow")
-              each avatarType in avatars
-                div(class="divTableCell")
-                  b= avatarType
-            div(class="divTableRow")
-              each avatarType in avatars                
-                div(class="divTableCell" id=avatarType+'squareDiv') square
-            div(class="divTableRow")
-              each avatarType in avatars                
-                div(class="divTableCell" id=avatarType+'roundedrectDiv') roundedrect
-            div(class="divTableRow")
-              each avatarType in avatars                
-                div(class="divTableCell" id=avatarType+'circleDiv') circle
-
-
+        p
+          div(class="divTable")
+            div(class="divTableBody")
+              div(class="divTableRow")
+                each avatarType in avatars
+                  div(class="divTableCell")
+                    b= avatarType
+              div(class="divTableRow")
+                each avatarType in avatars                
+                  div(class="divTableCell" id=avatarType+'squareDiv') square
+              div(class="divTableRow")
+                each avatarType in avatars                
+                  div(class="divTableCell" id=avatarType+'roundedrectDiv') roundedrect
+              div(class="divTableRow")
+                each avatarType in avatars                
+                  div(class="divTableCell" id=avatarType+'circleDiv') circle
+      script.
+        //enable enter key
+        var input = document.getElementById("avatarstring");
+        input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("showavatarbutton").click();
+          }
+        });
