@@ -2,7 +2,7 @@
 
 Avatar server to generate avatars from strings.
 
-image::images/avatar-server-0.2.jpg[Avatar-server UI]
+image::./images/avatar-server-0.2.png[Avatar-server UI]
 
 * Uses: https://github.com/gabrie-allaigre/node-avatar-builder
 
