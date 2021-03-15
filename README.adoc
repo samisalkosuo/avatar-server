@@ -2,16 +2,19 @@
 
 Avatar server to generate avatars from strings.
 
+image::images/avatar-server-0.2.jpg[Avatar-server UI]
+
 * Uses: https://github.com/gabrie-allaigre/node-avatar-builder
 
 == API 
 
 * `http://localhost:8080/avatar/string?mask=<mask>&size=<size>&output=<output-type>`
 ** where
-** `string=<any string to create avatar from>`
-** `mask=circle|roundedrect|square, default is square`
-** `size=avatar size, default is 128`
-** `output=base64|png, default is png`
+** `string = <any string to create avatar from>`
+** `type   = identicon|github|square|triangle|male8bit|female8bit|cat, default is identicon`
+** `mask   = circle|roundedrect|square, default is square`
+** `size   = avatar size, default is 128`
+** `output = base64|png, default is png`
 *** PNG content type: _image/png_
 *** Base64 content type: _text/plain_
 
@@ -29,4 +32,6 @@ Avatar server to generate avatars from strings.
 Avatar-server is also available from Dockerhub:
 
 * `docker run -it --rm -p 8080:8080 -e DEBUG=true kazhar/avatar-server`
+
+
 

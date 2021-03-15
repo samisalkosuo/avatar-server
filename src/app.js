@@ -28,6 +28,9 @@ var serverPort = 8080;
 // create a new express server
 var app = express();
 
+//set template engine
+app.set('view engine', 'pug')
+
 //common for all requets
 import {router as requestLogger} from './routes/requestLogger.js';
 app.use(requestLogger);

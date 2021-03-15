@@ -6,6 +6,11 @@ import * as Constants from '../constants.js';
 var router = express.Router();
 
 router.get('/', function (req, res) {
+  //res.render('index', { title: 'Hey', message: 'Hello there!' })
+  res.render('index');
+})
+
+router.get('/old', function (req, res) {
 
   res.writeHead(200, { "Content-Type": Constants.helpTextContentType });
   res.end(Constants.helpText);

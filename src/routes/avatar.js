@@ -13,7 +13,6 @@ const Avatar = require('avatar-builder');
 var router = express.Router();
 
 router.use(function (req, res, next) {
-
   var avatarFunction = Avatar.Image.identicon;
   if (req.query.type) {
     const type = req.query.type;
@@ -94,7 +93,7 @@ router.get('/:string', function (req, res, next) {
 
 
   const avatar = Avatar.builder(avatarFunction, size, size, { cache: Avatar.Cache.lru() });
-
+  
   debug(`req.params.string: ${req.params.string}`);
   avatar.create(req.params.string).then(buffer => {
     /* png buffer */

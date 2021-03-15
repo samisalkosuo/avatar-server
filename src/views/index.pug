@@ -1,0 +1,112 @@
+html
+  - var avatars = ["identicon", "github", "square", "triangle", "male8bit", "female8bit", "cat"]
+  head
+    title= title
+    script(type="text/javascript").
+      let avatars = ["identicon", "github", "square", "triangle", "male8bit", "female8bit", "cat"];
+      let masks = ["square", "roundedrect", "circle"];
+
+      function showAvatar() {
+        let avatarString = document.getElementById('avatarstring').value;
+        console.log("avatarString",avatarString);
+        for (var i = 0; i < avatars.length; i++) {
+          for (var j = 0; j < masks.length; j++){
+            getAvatar(avatarString, masks[j], avatars[i]);
+          }
+
+        }
+        return false;
+      };
+          
+      function getAvatar(avatarString,mask,avatarType) { 
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", `/avatar/${avatarString}?output=base64&type=${avatarType}&mask=${mask}`, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4){
+                if ((xhr.status == 200) || (xhr.status == 0)){
+                    var elementId = `${avatarType}${mask}Div`;
+                    var div = document.getElementById(elementId);
+                    div.innerHTML = `<img src="data:image/png;base64,${xhr.responseText}"/>`;
+                }else{
+                    console.log(`"\nError Code : ${xhr.status}\nError Message : ${xhr.responseText}`)                         
+                } 
+            }
+        };
+        xhr.send(null);
+      };
+    style.
+      h1 { font-size: 22px; color: #464646; }
+      h2 { font-size: 18px; }
+      h3 { font-size: 14px; }
+
+      a { color: #C2575B; text-decoration: none; }
+      a:hover { color: #F76F76; }
+      .center { margin: auto; width: 60%;}
+      /* DivTable.com */
+      .divTable{
+        display: table;
+        width: 100%;
+      }
+      .divTableRow {
+         display: table-row;
+      }
+      .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+      }
+      .divTableCell, .divTableHead {
+        border: 1px solid #999999;
+        display: table-cell;
+        padding: 3px 10px;
+      }
+      .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+        font-weight: bold;
+      }
+      .divTableFoot {
+        background-color: #EEE;
+        display: table-footer-group;
+        font-weight: bold;
+      }
+      .divTableBody {
+        display: table-row-group;
+      }
+    body
+    div(class="center")
+      h1 Avatar Server 
+      p String to create avatars:
+      input(
+        id="avatarstring"
+        name='avatarstring'
+        value='Hello World!'
+        )
+      p
+        a(href="" onClick="return showAvatar();") Get avatars
+      pre.
+        API: Usage: /avatar/string?type&lt;avatar-type>&mask=&lt;mask>&size=&lt;size>&output=&lt;output-type>      
+        where
+        string = &lt;any string to create avatar from>
+        type   = identicon|github|square|triangle|male8bit|female8bit|cat, default is identicon
+        mask   = circle|roundedrect|square, default is square
+        size   = avatar size, default is 128
+        output = base64|png, default is png
+
+      p
+        div(class="divTable")
+          div(class="divTableBody")
+            div(class="divTableRow")
+              each avatarType in avatars
+                div(class="divTableCell")
+                  b= avatarType
+            div(class="divTableRow")
+              each avatarType in avatars                
+                div(class="divTableCell" id=avatarType+'squareDiv') square
+            div(class="divTableRow")
+              each avatarType in avatars                
+                div(class="divTableCell" id=avatarType+'roundedrectDiv') roundedrect
+            div(class="divTableRow")
+              each avatarType in avatars                
+                div(class="divTableCell" id=avatarType+'circleDiv') circle
+
+
